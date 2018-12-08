@@ -1,0 +1,49 @@
+server:
+  port: 8080
+spring:
+  #数据源配置
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.1.200:3306/babytun?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: admin123456
+  #Redis配置
+  redis:
+    host: localhost
+    port: 6379
+    jedis:
+      pool:
+        max-active: 200
+        max-idle: 50
+        min-idle: 50
+        max-wait: 1000ms
+  #配置输出时间 将日期格式化为中国日期
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: GMT+8
+  #RabbitMQ配置
+  rabbitmq:
+    host: 192.168.1.130 #采用的haproxy转发负载均衡集群节点
+    port: 5671 #连接的端口采用的转发机制
+    username: guxin #连接的用户名
+    password: 123456 #连接的密码
+    virtual-host: /test #连接的数据库
+    connection-timeout: 2000ms #连接mq两秒超时
+    publisher-confirms: true #开启confirm回调，用于判断mq消息是否被接收！！
+    publisher-returns: true #用于处理没有被队列接收，没有队列的消息，会退回，要配合mandatory=true使用！！
+    template:
+      mandatory: true #为消息未被队列接收的处理，true为如果消息未被接收则会返回到returns，false为直接舍弃掉
+    #配置消费者
+    listener:
+      simple:
+        prefetch: 10 #定义消费者最多能够同时处理10个消息，限流
+        acknowledge-mode: manual #消息手动ack
+        concurrency: 5 #最小并发空闲数
+        max-concurrency: 10 #最大并发数
+#mybatis配置
+mybatis:
+  mapper-locations: classpath:sqlmap/*.xml
+#log日志
+logging:
+  level:
+    com.gx.babytun.mapper.TGoodsMapper: DEBUG

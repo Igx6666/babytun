@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.babytun.mapper.TCategoryMapper" >
+  <resultMap id="BaseResultMap" type="com.gx.babytun.entity.TCategory" >
+    <id column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <result column="category_name" property="categoryName" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+    <result column="category_level" property="categoryLevel" jdbcType="INTEGER" />
+    <result column="category_order" property="categoryOrder" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    category_id, category_name, parent_id, category_level, category_order
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_category
+    where category_id = #{categoryId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_category
+    where category_id = #{categoryId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gx.babytun.entity.TCategory" >
+    insert into t_category (category_id, category_name, parent_id, 
+      category_level, category_order)
+    values (#{categoryId,jdbcType=INTEGER}, #{categoryName,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, 
+      #{categoryLevel,jdbcType=INTEGER}, #{categoryOrder,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gx.babytun.entity.TCategory" >
+    insert into t_category
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+      <if test="categoryName != null" >
+        category_name,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="categoryLevel != null" >
+        category_level,
+      </if>
+      <if test="categoryOrder != null" >
+        category_order,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryName != null" >
+        #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryLevel != null" >
+        #{categoryLevel,jdbcType=INTEGER},
+      </if>
+      <if test="categoryOrder != null" >
+        #{categoryOrder,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gx.babytun.entity.TCategory" >
+    update t_category
+    <set >
+      <if test="categoryName != null" >
+        category_name = #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryLevel != null" >
+        category_level = #{categoryLevel,jdbcType=INTEGER},
+      </if>
+      <if test="categoryOrder != null" >
+        category_order = #{categoryOrder,jdbcType=INTEGER},
+      </if>
+    </set>
+    where category_id = #{categoryId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gx.babytun.entity.TCategory" >
+    update t_category
+    set category_name = #{categoryName,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+      category_level = #{categoryLevel,jdbcType=INTEGER},
+      category_order = #{categoryOrder,jdbcType=INTEGER}
+    where category_id = #{categoryId,jdbcType=INTEGER}
+  </update>
+</mapper>

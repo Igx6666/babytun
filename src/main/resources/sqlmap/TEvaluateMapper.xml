@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.babytun.mapper.TEvaluateMapper">
+    <resultMap id="BaseResultMap" type="com.gx.babytun.entity.TEvaluate">
+        <id column="evaluate_id" property="evaluateId" jdbcType="BIGINT"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="stars" property="stars" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="goods_id" property="goodsId" jdbcType="BIGINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    evaluate_id, content, stars, create_time, goods_id
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_evaluate
+        where evaluate_id = #{evaluateId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_evaluate
+    where evaluate_id = #{evaluateId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.gx.babytun.entity.TEvaluate">
+    insert into t_evaluate (evaluate_id, content, stars, 
+      create_time, goods_id)
+    values (#{evaluateId,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{stars,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{goodsId,jdbcType=BIGINT})
+  </insert>
+    <insert id="insertSelective" parameterType="com.gx.babytun.entity.TEvaluate">
+        insert into t_evaluate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="evaluateId != null">
+                evaluate_id,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="stars != null">
+                stars,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="goodsId != null">
+                goods_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="evaluateId != null">
+                #{evaluateId,jdbcType=BIGINT},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="stars != null">
+                #{stars,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="goodsId != null">
+                #{goodsId,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.gx.babytun.entity.TEvaluate">
+        update t_evaluate
+        <set>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="stars != null">
+                stars = #{stars,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="goodsId != null">
+                goods_id = #{goodsId,jdbcType=BIGINT},
+            </if>
+        </set>
+        where evaluate_id = #{evaluateId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.gx.babytun.entity.TEvaluate">
+        update t_evaluate
+        set content = #{content,jdbcType=VARCHAR},
+          stars = #{stars,jdbcType=INTEGER},
+          create_time = #{createTime,jdbcType=TIMESTAMP},
+          goods_id = #{goodsId,jdbcType=BIGINT}
+        where evaluate_id = #{evaluateId,jdbcType=BIGINT}
+     </update>
+    <select id="findEvaluateByGoodsId" resultMap="BaseResultMap" parameterType="long">
+        select * from t_evaluate where goods_id=#{goodsId} order by create_time desc
+    </select>
+</mapper>

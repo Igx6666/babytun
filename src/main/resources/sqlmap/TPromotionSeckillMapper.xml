@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gx.babytun.mapper.TPromotionSeckillMapper">
+    <resultMap id="BaseResultMap" type="com.gx.babytun.entity.TPromotionSeckill">
+        <id column="ps_id" property="psId" jdbcType="BIGINT"/>
+        <result column="goods_id" property="goodsId" jdbcType="INTEGER"/>
+        <result column="ps_count" property="psCount" jdbcType="INTEGER"/>
+        <result column="start_time" property="startTime" jdbcType="TIMESTAMP"/>
+        <result column="end_time" property="endTime" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="current_price" property="currentPrice" jdbcType="REAL"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ps_id, goods_id, ps_count, start_time, end_time, status, current_price
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_promotion_seckill
+        where ps_id = #{psId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_promotion_seckill
+    where ps_id = #{psId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.gx.babytun.entity.TPromotionSeckill">
+    insert into t_promotion_seckill (ps_id, goods_id, ps_count, 
+      start_time, end_time, status, 
+      current_price)
+    values (#{psId,jdbcType=BIGINT}, #{goodsId,jdbcType=INTEGER}, #{psCount,jdbcType=INTEGER}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{currentPrice,jdbcType=REAL})
+  </insert>
+    <insert id="insertSelective" parameterType="com.gx.babytun.entity.TPromotionSeckill">
+        insert into t_promotion_seckill
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="psId != null">
+                ps_id,
+            </if>
+            <if test="goodsId != null">
+                goods_id,
+            </if>
+            <if test="psCount != null">
+                ps_count,
+            </if>
+            <if test="startTime != null">
+                start_time,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="currentPrice != null">
+                current_price,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="psId != null">
+                #{psId,jdbcType=BIGINT},
+            </if>
+            <if test="goodsId != null">
+                #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="psCount != null">
+                #{psCount,jdbcType=INTEGER},
+            </if>
+            <if test="startTime != null">
+                #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="currentPrice != null">
+                #{currentPrice,jdbcType=REAL},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.gx.babytun.entity.TPromotionSeckill">
+        update t_promotion_seckill
+        <set>
+            <if test="goodsId != null">
+                goods_id = #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="psCount != null">
+                ps_count = #{psCount,jdbcType=INTEGER},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="currentPrice != null">
+                current_price = #{currentPrice,jdbcType=REAL},
+            </if>
+        </set>
+        where ps_id = #{psId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.gx.babytun.entity.TPromotionSeckill">
+        update t_promotion_seckill
+        set goods_id = #{goodsId,jdbcType=INTEGER},
+          ps_count = #{psCount,jdbcType=INTEGER},
+          start_time = #{startTime,jdbcType=TIMESTAMP},
+          end_time = #{endTime,jdbcType=TIMESTAMP},
+          status = #{status,jdbcType=INTEGER},
+          current_price = #{currentPrice,jdbcType=REAL}
+        where ps_id = #{psId,jdbcType=BIGINT}
+    </update>
+    <select id="findPromotionByStatus0" resultMap="BaseResultMap">
+        select * from t_promotion_seckill where NOW()BETWEEN start_time and end_time and `status`=0
+    </select>
+    <select id="findById" resultMap="BaseResultMap" parameterType="long">
+        select * from t_promotion_seckill where ps_id=#{id}
+    </select>
+    <select id="findByEndTime" resultMap="BaseResultMap">
+         select * from t_promotion_seckill where NOW()>=end_time and `status`=1
+    </select>
+</mapper>
