@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <classPathEntry location="D:\mysql\mysql-connector-java-5.1.23-bin.jar" />
+    <!--classPathEntry location="D:\zngkpt\m2\repository\mysql\mysql-connector-java\5.1.40\mysql-connector-java-5.1.40.jar" /-->
+    <context id="context1" targetRuntime="MyBatis3">
+
+        <commentGenerator>
+            <!-- 去除自动生成的注释 -->
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <!-- 数据库连接配置 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://192.168.1.200:3306/babytun?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=UTC"
+                        userId="root"
+                        password="admin123456" />
+        <!--jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/test"
+                        userId="root"
+                        password="mysql" /-->
+
+        <!-- 非必需，类型处理器，在数据库类型和java类型之间的转换控制-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--配置生成的实体包
+            targetPackage：生成的实体包位置，默认存放在src目录下
+            targetProject：目标工程名
+         -->
+        <javaModelGenerator targetPackage="com.gx.babytun.entity"
+                            targetProject="src/main/java" />
+
+        <!-- 实体包对应映射文件位置及名称，默认存放在src目录下 -->
+        <sqlMapGenerator targetPackage="sqlmap" targetProject="src/main/resources" >
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+        <javaClientGenerator targetPackage="com.gx.babytun.mapper"
+                             targetProject="src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!-- 配置表
+            schema：不用填写
+            tableName: 表名
+            enableCountByExample、enableSelectByExample、enableDeleteByExample、enableUpdateByExample、selectByExampleQueryId：
+            去除自动生成的例子
+        -->
+        <table schema="" tableName="t_order" enableCountByExample="false" enableSelectByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false" >
+        </table>
+       <!-- <table schema="" tableName="t_goods" enableCountByExample="false" enableSelectByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false" >
+        </table>
+        <table schema="" tableName="t_goods_cover" enableCountByExample="false" enableSelectByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false" >
+        </table>
+        <table schema="" tableName="t_goods_detail" enableCountByExample="false" enableSelectByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false" >
+        </table>
+        <table schema="" tableName="t_goods_param" enableCountByExample="false" enableSelectByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false" >
+        </table>
+        <table schema="" tableName="t_promotion_seckill" enableCountByExample="false" enableSelectByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false" >
+        </table>-->
+    </context>
+</generatorConfiguration>
