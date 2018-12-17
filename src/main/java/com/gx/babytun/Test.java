@@ -16,5 +16,6 @@ public class Test {
         HashMap<Integer,String> map  = new HashMap<Integer,String>();
         map.put(1,"guxin");
         System.out.println(map.get(1).hashCode());
+        System.out.println("hot_fix");
     }
 }
