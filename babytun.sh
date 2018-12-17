@@ -3,7 +3,7 @@
 #export PROJ_PATH='pwd'
 
 # Tomcat 路径
-#export TOMCAT_APP_PATH=/home/babytun
+#export TOMCAT_APP_PATH=/home/babytun/
 
 # base 函数
 killbabytun()
