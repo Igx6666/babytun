@@ -15,7 +15,7 @@ killbabytun() {
     fi
 }
 # 进入项目目录
-cd $PROJ_PATH/babytun
+cd $PROJ_PATH/babytun/babytun
 # 执行maven命令 进行清除及编译打包
 mvn clean install
 # 停止 tomcat
