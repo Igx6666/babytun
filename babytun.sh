@@ -4,7 +4,7 @@
 # Tomcat 路径
 #export TOMCAT_APP_PATH=/home/babytun
 # base 函数
-killbabytun(){
+killbabytun() {
     pid=`ps -ef|grep babytun | grep java|awk '{print $2}'`
     echo babytun Id list: $pid"
     if [ "$pid" = "" ]
