@@ -19,7 +19,7 @@ killbabytun
 # 删除所有工程
 rm -rf /home/babytun/*
 # copy 并 重命名 war 到 webapps 目录下
-cp $PROJ_PATH/babytun/target/babytun.jar /home/babytun/
+cp $PROJ_PATH/babytun/babytun/target/babytun.jar /home/babytun/
 # 启动tomcat
 nohup java -jar /home/babytun/babytun.jar >babytun.log &
 #防止nohup卡住
