@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # base 函数
-killbabytun()
-{
+killbabytun(){
    pid=`ps -ef|grep babytun | grep java|awk '{print $2}'`
     echo "babytun Id list: $pid"
     if [ "$pid" = "" ]
