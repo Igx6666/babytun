@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# base º¯Êý
+# base ï¿½ï¿½ï¿½ï¿½
 killbabytun(){
    pid=`ps -ef|grep babytun | grep java|awk '{print $2}'`
     echo "babytun Id list: $pid"
@@ -10,17 +10,17 @@ killbabytun(){
         kill -9 $pid
     fi
 }
-# ½øÈëÏîÄ¿Ä¿Â¼
+# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿Ä¿Â¼
 cd $PROJ_PATH/babytun
-# Ö´ÐÐmavenÃüÁî ½øÐÐÇå³ý¼°±àÒë´ò°ü
+# Ö´ï¿½ï¿½mavenï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½a
 mvn clean install
 # Í£Ö¹ tomcat
 killbabytun
-# É¾³ýËùÓÐ¹¤³Ì
+# É¾ï¿½ï¿½ï¿½ï¿½ï¿½Ð¹ï¿½ï¿½ï¿½
 rm -rf /home/babytun/*
-# copy ²¢ ÖØÃüÃû war µ½ webapps Ä¿Â¼ÏÂ
+# copy ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ war ï¿½ï¿½ webapps Ä¿Â¼ï¿½ï¿½
 cp $PROJ_PATH/babytun/target/babytun.jar /home/babytun/
-# Æô¶¯tomcat
+# ï¿½ï¿½ï¿½ï¿½tomcat
 nohup java -jar /home/babytun/babytun.jar >babytun.log &
-#·ÀÖ¹nohup¿¨×¡
+#ï¿½ï¿½Ö¹nohupï¿½ï¿½×¡
 jobs
