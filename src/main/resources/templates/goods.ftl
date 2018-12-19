@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>${goods.title}</title>
+    <title>定时自动化部署-${goods.title}</title>
     <link href="./css/layui.css" rel="stylesheet">
     <script src="./layui.all.js"></script>
     <style>
