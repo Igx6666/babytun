@@ -1,5 +1,10 @@
 package com.gx.babytun;
 
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,9 +18,21 @@ import java.util.Map;
 public class Test {
 
     public static void main(String[] args) {
-        HashMap<Integer,String> map  = new HashMap<Integer,String>();
-        map.put(1,"guxin");
-        System.out.println(map.get(1).hashCode());
-        System.out.println("hot_fix");
+        JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
+        jedisPoolConfig.setMaxTotal(50);
+        jedisPoolConfig.setMaxIdle(20);
+        jedisPoolConfig.setMaxWaitMillis(2000);
+        JedisPool pool = new JedisPool(jedisPoolConfig, "47.104.92.87", 6379);
+
+
+
+        Jedis jedis = pool.getResource();
+        String result = jedis.set("c", "a", "nx", "px", 5000);
+        System.out.println("result="+result);
+
+        jedisPoolConfig.clone();
+        pool.close();
+        jedis.close();
+
     }
 }

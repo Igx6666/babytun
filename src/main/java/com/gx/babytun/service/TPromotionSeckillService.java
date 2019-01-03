@@ -1,5 +1,6 @@
 package com.gx.babytun.service;
 
+import com.gx.babytun.entity.RabbitCommd;
 import com.gx.babytun.entity.TPromotionSeckill;
 import com.gx.babytun.mapper.TPromotionSeckillMapper;
 import org.springframework.amqp.core.Message;
@@ -92,7 +93,7 @@ public class TPromotionSeckillService {
         correlationData.setId("1");
         rabbitTemplate.setConfirmCallback(confirmCallback);
         rabbitTemplate.setReturnCallback(returnCallback);
-        rabbitTemplate.convertAndSend("babytun-order", null, concurrentHashMap, correlationData);
+        rabbitTemplate.convertAndSend(RabbitCommd.BABYTUN_ORDER_EXCHANGE, null, concurrentHashMap, correlationData);
         return orderNo;
     }
 

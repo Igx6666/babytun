@@ -25,7 +25,7 @@ import java.util.concurrent.TimeoutException;
  */
 @Component
 public class OrderConsumer {
- /*   @Resource
+    @Resource
     private TOrderMapper tOrderMapper;
 
     //@Payload代表消息的主体数据会自动转换
@@ -51,5 +51,5 @@ public class OrderConsumer {
         tOrderMapper.insertSelective(tOrder);
         channel.basicAck((Long)map.get(AmqpHeaders.DELIVERY_TAG), false);
         channel.close();
-    }*/
+    }
 }
